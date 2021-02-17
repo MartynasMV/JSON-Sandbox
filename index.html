@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>JSON Sandbox</title>
+	</head>
+	<body>
+		<ul id="people"></ul>
+		<script>
+			/* 			var person = {
+						name: "Vision",
+						age: 1,
+						address: {
+							street: "Westview street",
+							city: "Westview",
+						},
+						email: function () {
+							return "vision@gmail.com";
+						},
+						children: ["Thomas", "William"],
+					};
+
+					//console.log(person.name);
+					//console.log(person.age);
+					//console.log(person.email());
+					//prepping it to be suitable for JASON:
+					person = JSON.stringify(person);
+					//			console.log(person); //as it is as JSON we cant log person.name
+					//JSON can be converted back with JSON.parse(person)
+					person = JSON.parse(person);
+					console.log(person.address.street);
+					console.log(person.children[0]);
+
+					var people = [
+						{
+							name: "Wanda",
+							age: 35,
+						},
+						{
+							name: "Vision",
+							age: 40,
+						},
+						{
+							name: "Saraaaah!",
+							age: 25,
+						},
+					];
+					// console.log(people[0].age);
+					//looping through peoples names and printing it in ul#people
+					var output = "";
+					for (var i = 0; i < people.length; i++) {
+						console.log(people[i].name);
+						output += `<li>${people[i].name}</li>`;
+					}
+					document.querySelector("#people").innerHTML = output;
+			*/
+			//taking data from JSON file:
+			var xhttp = new XMLHttpRequest();
+			xhttp.onreadystatechange = function () {
+				if (this.readyState == 4 && this.status == 200) {
+					var response = JSON.parse(xhttp.responseText);
+					console.log(response.people); //thats why we unformatted JSON by parsing it in the line 63. In other cas eit would be "undefined"
+					var people = response.people;
+					var output = "";
+					for (var i = 0; i < people.length; i++) {
+						output += `<li>${people[i].name}</li>`;
+					}
+					document.querySelector("#people").innerHTML = output;
+				}
+			};
+			xhttp.open("GET", "people.json", true);
+			xhttp.send();
+		</script>
+	</body>
+</html>
